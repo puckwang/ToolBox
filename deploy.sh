@@ -13,7 +13,7 @@ echo "# Removing existing files"
 rm -rf dist/*
 
 echo "# Generating site"
-yarn build
+yarn build --no-clean
 
 echo "# Updating public branch"
 echo "tool.puckwang.com" > dist/CNAME
