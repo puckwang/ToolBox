@@ -1,12 +1,432 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" href="/favicon.ico"><title>資料編碼與解碼 | Puck Toolbox</title><link href="/css/chunk-52e72434.28a0ee29.css" rel="prefetch"><link href="/css/chunk-73c9992d.1fcd36ce.css" rel="prefetch"><link href="/css/chunk-a6e2c058.052edc84.css" rel="prefetch"><link href="/js/chunk-2d21a3d2.8e0cbe6e.js" rel="prefetch"><link href="/js/chunk-2d22d746.d39e4c8c.js" rel="prefetch"><link href="/js/chunk-52e72434.b69f9c31.js" rel="prefetch"><link href="/js/chunk-73c9992d.39766556.js" rel="prefetch"><link href="/js/chunk-a6e2c058.42ddce1b.js" rel="prefetch"><link href="/css/app.f5b6289e.css" rel="preload" as="style"><link href="/js/app.1f8e1238.js" rel="preload" as="script"><link href="/js/chunk-vendors.c52b3ce3.js" rel="preload" as="script"><link href="/css/app.f5b6289e.css" rel="stylesheet"><link rel="stylesheet" type="text/css" href="/css/chunk-a6e2c058.052edc84.css"><script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script><script charset="utf-8" src="/js/chunk-a6e2c058.42ddce1b.js"></script><meta property="og:type" content="website" data-vue-meta="true"><meta property="og:image" content="https://tool.puckwang.com/img/logo-200x200.4d606c70.png" data-vmid="og:image" data-vue-meta="true"><meta property="og:updated_time" content="Tue Jan 29 2019 01:13:23 GMT+0800 (Taipei Standard Time)" data-vue-meta="true"><meta property="twitter:card" content="summary_large_image" data-vue-meta="true"><meta property="twitter:image" content="https://tool.puckwang.com/img/logo-200x200.4d606c70.png" data-vmid="twitter:image" data-vue-meta="true"><meta property="og:title" content="資料編碼與解碼 - Puck Toolbox" data-vmid="og:title" data-vue-meta="true"><meta property="og:description" content="一個支援多種格式的編碼與解碼工具，支援 Base32、Base64、Punycode。" data-vmid="og:description" data-vue-meta="true"><meta property="og:url" content="https://tool.puckwang.com/tools/codecs" data-vmid="og:url" data-vue-meta="true"><meta property="twitter:title" content="資料編碼與解碼 - Puck Toolbox" data-vmid="twitter:title" data-vue-meta="true"><meta property="twitter:description" content="一個支援多種格式的編碼與解碼工具，支援 Base32、Base64、Punycode。" data-vmid="twitter:description" data-vue-meta="true"></head><body><noscript><strong>We're sorry but puck-toolbox doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript><div id="app"><nav class="navbar navbar-expand-lg sticky-top navbar-dark mb-3" style="background-color: rgb(57, 179, 102);"><a href="/" class="navbar-brand"><div class="border border-white rounded d-inline-block align-top mr-1" style="padding: 1px;"><img src="/img/logo.4d606c70.png" width="30" height="30"></div>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><style type="text/css">svg:not(:root).svg-inline--fa {
+  overflow: visible;
+}
+
+.svg-inline--fa {
+  display: inline-block;
+  font-size: inherit;
+  height: 1em;
+  overflow: visible;
+  vertical-align: -0.125em;
+}
+.svg-inline--fa.fa-lg {
+  vertical-align: -0.225em;
+}
+.svg-inline--fa.fa-w-1 {
+  width: 0.0625em;
+}
+.svg-inline--fa.fa-w-2 {
+  width: 0.125em;
+}
+.svg-inline--fa.fa-w-3 {
+  width: 0.1875em;
+}
+.svg-inline--fa.fa-w-4 {
+  width: 0.25em;
+}
+.svg-inline--fa.fa-w-5 {
+  width: 0.3125em;
+}
+.svg-inline--fa.fa-w-6 {
+  width: 0.375em;
+}
+.svg-inline--fa.fa-w-7 {
+  width: 0.4375em;
+}
+.svg-inline--fa.fa-w-8 {
+  width: 0.5em;
+}
+.svg-inline--fa.fa-w-9 {
+  width: 0.5625em;
+}
+.svg-inline--fa.fa-w-10 {
+  width: 0.625em;
+}
+.svg-inline--fa.fa-w-11 {
+  width: 0.6875em;
+}
+.svg-inline--fa.fa-w-12 {
+  width: 0.75em;
+}
+.svg-inline--fa.fa-w-13 {
+  width: 0.8125em;
+}
+.svg-inline--fa.fa-w-14 {
+  width: 0.875em;
+}
+.svg-inline--fa.fa-w-15 {
+  width: 0.9375em;
+}
+.svg-inline--fa.fa-w-16 {
+  width: 1em;
+}
+.svg-inline--fa.fa-w-17 {
+  width: 1.0625em;
+}
+.svg-inline--fa.fa-w-18 {
+  width: 1.125em;
+}
+.svg-inline--fa.fa-w-19 {
+  width: 1.1875em;
+}
+.svg-inline--fa.fa-w-20 {
+  width: 1.25em;
+}
+.svg-inline--fa.fa-pull-left {
+  margin-right: 0.3em;
+  width: auto;
+}
+.svg-inline--fa.fa-pull-right {
+  margin-left: 0.3em;
+  width: auto;
+}
+.svg-inline--fa.fa-border {
+  height: 1.5em;
+}
+.svg-inline--fa.fa-li {
+  width: 2em;
+}
+.svg-inline--fa.fa-fw {
+  width: 1.25em;
+}
+
+.fa-layers svg.svg-inline--fa {
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.fa-layers {
+  display: inline-block;
+  height: 1em;
+  position: relative;
+  text-align: center;
+  vertical-align: -0.125em;
+  width: 1em;
+}
+.fa-layers svg.svg-inline--fa {
+  -webkit-transform-origin: center center;
+          transform-origin: center center;
+}
+
+.fa-layers-counter, .fa-layers-text {
+  display: inline-block;
+  position: absolute;
+  text-align: center;
+}
+
+.fa-layers-text {
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  -webkit-transform-origin: center center;
+          transform-origin: center center;
+}
+
+.fa-layers-counter {
+  background-color: #ff253a;
+  border-radius: 1em;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  color: #fff;
+  height: 1.5em;
+  line-height: 1;
+  max-width: 5em;
+  min-width: 1.5em;
+  overflow: hidden;
+  padding: 0.25em;
+  right: 0;
+  text-overflow: ellipsis;
+  top: 0;
+  -webkit-transform: scale(0.25);
+          transform: scale(0.25);
+  -webkit-transform-origin: top right;
+          transform-origin: top right;
+}
+
+.fa-layers-bottom-right {
+  bottom: 0;
+  right: 0;
+  top: auto;
+  -webkit-transform: scale(0.25);
+          transform: scale(0.25);
+  -webkit-transform-origin: bottom right;
+          transform-origin: bottom right;
+}
+
+.fa-layers-bottom-left {
+  bottom: 0;
+  left: 0;
+  right: auto;
+  top: auto;
+  -webkit-transform: scale(0.25);
+          transform: scale(0.25);
+  -webkit-transform-origin: bottom left;
+          transform-origin: bottom left;
+}
+
+.fa-layers-top-right {
+  right: 0;
+  top: 0;
+  -webkit-transform: scale(0.25);
+          transform: scale(0.25);
+  -webkit-transform-origin: top right;
+          transform-origin: top right;
+}
+
+.fa-layers-top-left {
+  left: 0;
+  right: auto;
+  top: 0;
+  -webkit-transform: scale(0.25);
+          transform: scale(0.25);
+  -webkit-transform-origin: top left;
+          transform-origin: top left;
+}
+
+.fa-lg {
+  font-size: 1.3333333333em;
+  line-height: 0.75em;
+  vertical-align: -0.0667em;
+}
+
+.fa-xs {
+  font-size: 0.75em;
+}
+
+.fa-sm {
+  font-size: 0.875em;
+}
+
+.fa-1x {
+  font-size: 1em;
+}
+
+.fa-2x {
+  font-size: 2em;
+}
+
+.fa-3x {
+  font-size: 3em;
+}
+
+.fa-4x {
+  font-size: 4em;
+}
+
+.fa-5x {
+  font-size: 5em;
+}
+
+.fa-6x {
+  font-size: 6em;
+}
+
+.fa-7x {
+  font-size: 7em;
+}
+
+.fa-8x {
+  font-size: 8em;
+}
+
+.fa-9x {
+  font-size: 9em;
+}
+
+.fa-10x {
+  font-size: 10em;
+}
+
+.fa-fw {
+  text-align: center;
+  width: 1.25em;
+}
+
+.fa-ul {
+  list-style-type: none;
+  margin-left: 2.5em;
+  padding-left: 0;
+}
+.fa-ul > li {
+  position: relative;
+}
+
+.fa-li {
+  left: -2em;
+  position: absolute;
+  text-align: center;
+  width: 2em;
+  line-height: inherit;
+}
+
+.fa-border {
+  border: solid 0.08em #eee;
+  border-radius: 0.1em;
+  padding: 0.2em 0.25em 0.15em;
+}
+
+.fa-pull-left {
+  float: left;
+}
+
+.fa-pull-right {
+  float: right;
+}
+
+.fa.fa-pull-left,
+.fas.fa-pull-left,
+.far.fa-pull-left,
+.fal.fa-pull-left,
+.fab.fa-pull-left {
+  margin-right: 0.3em;
+}
+.fa.fa-pull-right,
+.fas.fa-pull-right,
+.far.fa-pull-right,
+.fal.fa-pull-right,
+.fab.fa-pull-right {
+  margin-left: 0.3em;
+}
+
+.fa-spin {
+  -webkit-animation: fa-spin 2s infinite linear;
+          animation: fa-spin 2s infinite linear;
+}
+
+.fa-pulse {
+  -webkit-animation: fa-spin 1s infinite steps(8);
+          animation: fa-spin 1s infinite steps(8);
+}
+
+@-webkit-keyframes fa-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+@keyframes fa-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+.fa-rotate-90 {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=1)";
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
+}
+
+.fa-rotate-180 {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2)";
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+}
+
+.fa-rotate-270 {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=3)";
+  -webkit-transform: rotate(270deg);
+          transform: rotate(270deg);
+}
+
+.fa-flip-horizontal {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=0, mirror=1)";
+  -webkit-transform: scale(-1, 1);
+          transform: scale(-1, 1);
+}
+
+.fa-flip-vertical {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2, mirror=1)";
+  -webkit-transform: scale(1, -1);
+          transform: scale(1, -1);
+}
+
+.fa-flip-both, .fa-flip-horizontal.fa-flip-vertical {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2, mirror=1)";
+  -webkit-transform: scale(-1, -1);
+          transform: scale(-1, -1);
+}
+
+:root .fa-rotate-90,
+:root .fa-rotate-180,
+:root .fa-rotate-270,
+:root .fa-flip-horizontal,
+:root .fa-flip-vertical,
+:root .fa-flip-both {
+  -webkit-filter: none;
+          filter: none;
+}
+
+.fa-stack {
+  display: inline-block;
+  height: 2em;
+  position: relative;
+  width: 2.5em;
+}
+
+.fa-stack-1x,
+.fa-stack-2x {
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.svg-inline--fa.fa-stack-1x {
+  height: 1em;
+  width: 1.25em;
+}
+.svg-inline--fa.fa-stack-2x {
+  height: 2em;
+  width: 2.5em;
+}
+
+.fa-inverse {
+  color: #fff;
+}
+
+.sr-only {
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+.sr-only-focusable:active, .sr-only-focusable:focus {
+  clip: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  width: auto;
+}</style><link rel="icon" href="/favicon.ico"><title>資料編碼與解碼 | Puck Toolbox</title><link href="/css/chunk-004983ed.eba8a964.css" rel="prefetch"><link href="/css/chunk-274e1eb6.621d80d7.css" rel="prefetch"><link href="/css/chunk-52e72434.28a0ee29.css" rel="prefetch"><link href="/js/chunk-004983ed.c12c4608.js" rel="prefetch"><link href="/js/chunk-274e1eb6.0086e070.js" rel="prefetch"><link href="/js/chunk-2d21a3d2.d77d53a1.js" rel="prefetch"><link href="/js/chunk-2d22d746.d39e4c8c.js" rel="prefetch"><link href="/js/chunk-52e72434.b69f9c31.js" rel="prefetch"><link href="/css/app.2de7efa1.css" rel="preload" as="style"><link href="/js/app.f3c09002.js" rel="preload" as="script"><link href="/js/chunk-vendors.35bc48a7.js" rel="preload" as="script"><link href="/css/app.2de7efa1.css" rel="stylesheet"><link rel="stylesheet" type="text/css" href="/css/chunk-274e1eb6.621d80d7.css"><script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script><script charset="utf-8" src="/js/chunk-274e1eb6.0086e070.js"></script><meta property="og:type" content="website" data-vue-meta="true"><meta property="og:image" content="https://tool.puckwang.com/img/logo-200x200.4d606c70.png" data-vmid="og:image" data-vue-meta="true"><meta property="og:updated_time" content="Wed Jan 30 2019 23:48:38 GMT+0800 (Taipei Standard Time)" data-vue-meta="true"><meta property="twitter:card" content="summary_large_image" data-vue-meta="true"><meta property="twitter:image" content="https://tool.puckwang.com/img/logo-200x200.4d606c70.png" data-vmid="twitter:image" data-vue-meta="true"><meta property="og:title" content="資料編碼與解碼 - Puck Toolbox" data-vmid="og:title" data-vue-meta="true"><meta property="og:description" content="一個支援多種格式的編碼與解碼工具，支援 Base32、Base64、Punycode。" data-vmid="og:description" data-vue-meta="true"><meta property="og:url" content="https://tool.puckwang.com/tools/codecs" data-vmid="og:url" data-vue-meta="true"><meta property="twitter:title" content="資料編碼與解碼 - Puck Toolbox" data-vmid="twitter:title" data-vue-meta="true"><meta property="twitter:description" content="一個支援多種格式的編碼與解碼工具，支援 Base32、Base64、Punycode。" data-vmid="twitter:description" data-vue-meta="true"></head><body><noscript><strong>We're sorry but puck-toolbox doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript><div id="app"><nav class="navbar navbar-expand-lg sticky-top navbar-dark mb-3" style="background-color: rgb(57, 179, 102);"><a href="/" class="navbar-brand"><div class="border border-white rounded d-inline-block align-top mr-1" style="padding: 1px;"><img src="/img/logo.4d606c70.png" width="30" height="30"></div>
             Puck Toolbox
         </a><button type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"><span class="navbar-toggler-icon"></span></button><div id="navbarToggler" class="collapse navbar-collapse"><ul class="navbar-nav mr-auto mt-2 mt-lg-0"><li class="nav-item"><a href="/" class="nav-link router-link-active">Home</a></li><li class="nav-item dropdown"><a href="#" id="navbarToolsMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">
                         Tools
-                    </a><div aria-labelledby="navbarToolsMenu" class="dropdown-menu"><a href="/tools/codecs" class="dropdown-item router-link-exact-active router-link-active">資料編碼與解碼</a><a href="/tools/hash" class="dropdown-item">Hash 產生器</a><a href="/tools/luckyDraw" class="dropdown-item">抽獎程式</a></div></li></ul><form class="form-inline"><div class="locale-changer"><select class="form-control form-control-sm"><option value="tw">中文</option><option value="en">English</option></select></div></form></div></nav><div class="container-fluid"><div data-v-c46b4fbc="" class="container"><h1 data-v-c46b4fbc="">資料編碼與解碼</h1><p data-v-c46b4fbc="" class="lead">
+                    </a><div aria-labelledby="navbarToolsMenu" class="dropdown-menu"><a href="/tools/codecs" class="dropdown-item router-link-exact-active router-link-active">資料編碼與解碼</a><a href="/tools/hash" class="dropdown-item">Hash 產生器</a><a href="/tools/luckyDraw" class="dropdown-item">抽獎程式</a></div></li></ul><form class="form-inline"><div class="locale-changer"><select class="form-control form-control-sm"><option value="tw">中文</option><option value="en">English</option></select></div></form></div></nav><div class="container-fluid"><div data-v-c23866ec="" class="container"><h1 data-v-c23866ec="">資料編碼與解碼</h1><p data-v-c23866ec="" class="lead">
         一個支援多種格式的編碼與解碼工具，支援 Base32、Base64、Punycode。
-    </p><!----><div data-v-c46b4fbc="" class="form-group"><textarea data-v-c46b4fbc="" rows="7" placeholder="文字" class="form-control"></textarea></div><div data-v-c46b4fbc="" class="form-group row justify-content-md-center"><div data-v-c46b4fbc="" class="form-group col-12 col-md-4 col-lg-2"><select data-v-c46b4fbc="" id="inputState" class="form-control"><option data-v-c46b4fbc="">base64</option><option data-v-c46b4fbc="">base64url</option><option data-v-c46b4fbc="">base32</option><option data-v-c46b4fbc="">Punycode</option><option data-v-c46b4fbc="">Punycode (Domain)</option></select></div><div data-v-c46b4fbc="" class="form-group col-12 col-md-3 col-lg-2"><button data-v-c46b4fbc="" type="button" class="btn btn-sm btn-primary btn-block">編碼
-            </button></div><div data-v-c46b4fbc="" class="form-group col-12 col-md-3 col-lg-2"><button data-v-c46b4fbc="" type="button" class="btn btn-sm btn-primary btn-block">解碼
-            </button></div></div><div data-v-c46b4fbc="" class="form-group"><textarea data-v-c46b4fbc="" rows="7" placeholder="雜湊值" readonly="readonly" class="form-control"></textarea></div></div></div></div><script src="/js/chunk-vendors.c52b3ce3.js"></script><script src="/js/app.1f8e1238.js"></script><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-44442837-7"></script><script>window.dataLayer = window.dataLayer || [];
+    </p><!----><div data-v-c23866ec="" class="form-group"><textarea data-v-c23866ec="" placeholder="文字" class="form-control" style="min-height: 250px;"></textarea></div><div data-v-c23866ec="" class="form-group row justify-content-md-center"><div data-v-c23866ec="" class="form-group col-12 col-md-4 col-lg-2"><select data-v-c23866ec="" id="inputState" class="form-control"><option data-v-c23866ec="">base64</option><option data-v-c23866ec="">base64url</option><option data-v-c23866ec="">base32</option><option data-v-c23866ec="">Punycode</option><option data-v-c23866ec="">Punycode (Domain)</option></select></div><div data-v-c23866ec="" class="form-group col-12 col-md-3 col-lg-2"><button data-v-c23866ec="" type="button" class="btn btn-sm btn-primary btn-block">編碼
+            </button></div><div data-v-c23866ec="" class="form-group col-12 col-md-3 col-lg-2"><button data-v-c23866ec="" type="button" class="btn btn-sm btn-primary btn-block">解碼
+            </button></div></div><div data-v-c23866ec="" class="form-group"><div data-v-07f9acca="" data-v-c23866ec=""><div data-v-07f9acca="" class="bd-clipboard"><h4 data-v-07f9acca=""><a data-v-07f9acca="" href="#" data-toggle="tooltip" data-placement="top" title="" class="btn-clipboard badge badge-pill badge-primary bg-main-color text-area-has-copy" data-original-title="點擊複製"><svg data-v-07f9acca="" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="copy" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="svg-inline--fa fa-copy fa-w-14"><path data-v-07f9acca="" fill="currentColor" d="M320 448v40c0 13.255-10.745 24-24 24H24c-13.255 0-24-10.745-24-24V120c0-13.255 10.745-24 24-24h72v296c0 30.879 25.121 56 56 56h168zm0-344V0H152c-13.255 0-24 10.745-24 24v368c0 13.255 10.745 24 24 24h272c13.255 0 24-10.745 24-24V128H344c-13.2 0-24-10.8-24-24zm120.971-31.029L375.029 7.029A24 24 0 0 0 358.059 0H352v96h96v-6.059a24 24 0 0 0-7.029-16.97z" class=""></path></svg></a></h4></div><textarea data-v-07f9acca="" placeholder="密文" readonly="readonly" class="form-control" style="min-height: 250px;"></textarea></div></div></div></div></div><script src="/js/chunk-vendors.35bc48a7.js"></script><script src="/js/app.f3c09002.js"></script><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-44442837-7"></script><script>window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
 
